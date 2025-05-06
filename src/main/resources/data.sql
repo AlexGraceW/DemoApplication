@@ -1,6 +1,5 @@
-INSERT INTO CUSTOMERS (name, surname, age, phone_number) VALUES
-('Alexey', 'Ivanov', 30, '123-456-7890');
+INSERT INTO products (name) VALUES ('Guitar');
 
-INSERT INTO ORDERS (date, customer_id, product_name, amount) VALUES
-(CURRENT_DATE, 1, 'Tent', 99.99),
-(CURRENT_DATE, 1, 'Camping Chair', 49.99);
+INSERT INTO orders (product_name, amount, date, product_id) VALUES
+('Guitar', 199.99, '2025-05-06', 1),
+('Guitar', 249.99, '2025-05-07', 1);

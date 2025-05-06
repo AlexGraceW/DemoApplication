@@ -1,8 +1,9 @@
 package com.example.demoapplication.controller;
 
-import com.example.demoapplication.model.OrderInfo;
-import com.example.demoapplication.model.ProductResponse;
+import com.example.demoapplication.entity.Order;
+import com.example.demoapplication.entity.Product;
 import com.example.demoapplication.repository.ProductRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,8 +19,19 @@ public class ProductController {
     }
 
     @GetMapping("/fetch-product")
-    public ProductResponse fetchProduct(@RequestParam String name) {
-        List<OrderInfo> orders = repository.getOrdersByName(name);
-        return new ProductResponse(name, orders);
+    public Product fetchProduct(@RequestParam String name) {
+        return repository.findByName(name).orElse(null);
+    }
+
+    @PostMapping("/create")
+    @Transactional
+    public void createProduct(@RequestBody Product product) {
+        List<Order> orders = product.getOrders();
+        if (orders != null) {
+            for (Order order : orders) {
+                order.setProduct(product);
+            }
+        }
+        repository.save(product);
     }
 }

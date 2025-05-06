@@ -1,16 +1,16 @@
-CREATE TABLE IF NOT EXISTS CUSTOMERS (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(50),
-    surname VARCHAR(50),
-    age INT,
-    phone_number VARCHAR(20)
+DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS products;
+
+CREATE TABLE products (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS ORDERS (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    date DATE,
-    customer_id INT,
-    product_name VARCHAR(100),
+CREATE TABLE orders (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    product_name VARCHAR(255),
     amount DECIMAL(10, 2),
-    FOREIGN KEY (customer_id) REFERENCES CUSTOMERS(id)
+    date DATE,
+    product_id BIGINT,
+    CONSTRAINT fk_product FOREIGN KEY (product_id) REFERENCES products(id)
 );
