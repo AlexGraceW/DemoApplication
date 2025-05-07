@@ -2,13 +2,14 @@ package com.example.demoapplication.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "orders")
 public class Order {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,6 +18,7 @@ public class Order {
     private String productName;
 
     private BigDecimal amount;
+
     private LocalDate date;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -24,18 +26,45 @@ public class Order {
     @JsonBackReference
     private Product product;
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    // --- Getters and setters ---
 
-    public String getProductName() { return productName; }
-    public void setProductName(String productName) { this.productName = productName; }
+    public Long getId() {
+        return id;
+    }
 
-    public BigDecimal getAmount() { return amount; }
-    public void setAmount(BigDecimal amount) { this.amount = amount; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public LocalDate getDate() { return date; }
-    public void setDate(LocalDate date) { this.date = date; }
+    public String getProductName() {
+        return productName;
+    }
 
-    public Product getProduct() { return product; }
-    public void setProduct(Product product) { this.product = product; }
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 }
