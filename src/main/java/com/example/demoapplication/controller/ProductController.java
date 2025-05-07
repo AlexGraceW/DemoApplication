@@ -34,4 +34,30 @@ public class ProductController {
         }
         repository.save(product);
     }
+
+    @GetMapping("/by-product-name")
+    public List<Product> getByProductName(@RequestParam String productName) {
+        return repository.findByProductName(productName);
+    }
+
+    @GetMapping("/by-city")
+    public List<Product> getByCity(@RequestParam String city) {
+        return repository.findByCity(city);
+    }
+
+    @GetMapping("/by-age-less-than")
+    public List<Product> getByAgeLessThan(@RequestParam int age) {
+        return repository.findByAgeLessThanSorted(age);
+    }
+
+    @GetMapping("/by-name-surname")
+    public Product getByNameAndSurname(@RequestParam String name, @RequestParam String surname) {
+        return repository.findByNameAndSurname(name, surname).orElse(null);
+    }
+
+    @GetMapping("/all")
+    public List<Product> getAllProducts() {
+        return repository.findAll();
+    }
+
 }
